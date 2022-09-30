@@ -1,3 +1,4 @@
+//Brute force approach
 class Solution {
     public void sortColors(int[] nums) {
         int arr[] = new int[nums.length];
