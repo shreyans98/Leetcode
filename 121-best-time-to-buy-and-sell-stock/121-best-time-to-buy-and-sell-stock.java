@@ -4,9 +4,10 @@ class Solution {
         int profit = 0;
         
         for(int i=0; i<prices.length;i++) {
-            min = Math.min(min, prices[i]);
+            min = Math.min(min, prices[i]); //to get the minimum buying price from the array
             
-            if(prices[i]-min > profit)
+            //condition to check if we have a selling price > buying price on days after the stock is bought else profit will be 0. If possible, return the maximum value
+            if(prices[i]-min > profit) 
                 profit = prices[i]-min;
             
         }
