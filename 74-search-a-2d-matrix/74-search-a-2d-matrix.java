@@ -6,14 +6,12 @@ class Solution {
         boolean result=false;
         for(int i=0;i<matrix.length;i++) { // Loop to access individual sub-array
             for(int j=0;j<matrix[0].length;j++) { //loop to access the individual elements
-               if(matrix[i][j] == target){
-                   result = true;
-                   break;
-               }
+               if(matrix[i][j] == target)
+                   return true;
             }
         }
         
-        return result;
+        return false;
         
     }
 }
