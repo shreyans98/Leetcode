@@ -1,19 +1,24 @@
 class Solution {
     public int firstMissingPositive(int[] nums) {
         
-        //we are using set here since set in java does not contain duplicate value, so even if a number occurs multiple times we will add to the set only once.
-        Set<Integer> count = new HashSet<>();
+        int correct_pos = 0;
+        int temp = 0;
         
-        //add all the numbers to the set
-        for(int i=0;i<nums.length;i++)
-            count.add(nums[i]);
-        
-        //traverse through the set to get the smalllest integer which is not present.
-        int i=1;
-        while(count.contains(i)) {
-            i++;
+        for(int i=0;i<nums.length;i++) {
+            correct_pos = nums[i]-1;
+            
+            while(nums[i] >=1 && nums[i] < nums.length && nums[i] != nums[correct_pos]){
+                temp = nums[i];
+                nums[i] = nums[correct_pos];
+                nums[correct_pos] = temp;
+                correct_pos = nums[i]-1;
+            }
         }
-        return i;
-        
+        for(int i=0;i<nums.length;i++) {
+            if(i+1 != nums[i])
+                return i+1;
+        }
+      return nums.length+1;
+
     }
 }
