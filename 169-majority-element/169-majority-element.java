@@ -1,24 +1,17 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        
-        //using HashMap to store the frequency of every element
-        Map<Integer, Integer> count = new HashMap<Integer, Integer>();
-        for(int num : nums) {
-            if(!count.containsKey(num))
-                count.put(num, 1);
+        int count = 0;
+        int element = 0;
+        for(int num: nums) {
+            if(count==0)
+                element = num;
+            if(num == element)
+                count++;
             else
-                count.put(num, count.get(num)+1);
-                
+                count--;
         }
         
-        Map.Entry<Integer, Integer> majEntry = null;
-        for(Map.Entry<Integer, Integer> entry : count.entrySet()) {
-            if(majEntry == null || entry.getValue() > majEntry.getValue()) {
-                majEntry = entry;
-            }
-        }
-        
-        return majEntry.getKey();
+        return element;
         
     }
 }
