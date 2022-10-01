@@ -1,1 +1,3 @@
-​
+​idea behind the solution is to iterate the wwhole array and place the number according in the index which is same as the value (ex: [3,4,7,1] here we will start with [3] as it is the first element and place it in position 2 (value -1) because array uses 0 indexing. This process will continue and in mean time we will ignore swapping the position of values less than 1 since 1 is the smallest possible integer and values greater than length of array since arr.length+1 is the worst case solution
+        
+now when we have arranged all the arrays in its position which are within the limits of 1 to arr.length() we will check for which index it doesn't havve the value same as itself. The first instance where we get this will give us the final answer
