@@ -12,18 +12,20 @@
 public class Solution {
     public boolean hasCycle(ListNode head) {
         
-        //using a hash table
+ //we will use two pointers and initialise it with head. While the fast pointer moves 2 position at a time, slow pointer moves 1 position at a time. The moment slow & fast are equal, it means a cycle is detected else no cycle is detected.       
+        ListNode fast = head;
+        ListNode slow = head;
+        if(head == null)
+            return false;
         
-        
-        HashSet<ListNode> hashTable = new HashSet();
-
-        
-        while(head != null) {
-            if(hashTable.contains(head))
+        while(fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow)
                 return true;
-            hashTable.add(head);
-            head = head.next;
         }
+        
         return false;
+        
     }
 }
