@@ -10,31 +10,34 @@
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        //brute force approach
-
-//Take a stack and temp node. Assign the temp node with the head node and now till the time it is not empty keep inserting it into the stack. 
-        ListNode temp = head;
+        ListNode fast = head;
+        ListNode slow = head;
         
-        Stack<Integer> stack = new Stack<Integer>();
-        
-        //loop for storing the value in stack till the end of the list
-
-        while(temp != null) {
-            stack.push(temp.val);
-            temp = temp.next;
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
         
-        //again assign temp to head in order to check for palindrome since we will have last value first coming out from stack 
-        temp = head;
-        
-        //loop to check if temp value is equal or not.
-        while(temp != null) {
-            if(temp.val != stack.pop())
+        slow = rev(slow);
+        fast = head;
+        while(slow != null) {
+            if(slow.val != fast.val)
                 return false;
-            temp = temp.next;
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return true;
+    }
+    
+    public ListNode rev(ListNode head) {
+        ListNode reverse = null;
+        while(head != null) {
+            ListNode prev = head.next;
+            head.next = reverse;
+            reverse = head;
+            head = prev;
         }
         
-        return true;
-           
+        return reverse;
     }
 }
