@@ -12,15 +12,17 @@
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         
-//If the two list have intersection, then there must be a node where headA and headB will be equal(not in value) and if not then there is no intersection
+//We can use hashing to store the address and then check in hash if we got the same address for second list
+        HashSet<ListNode> set = new HashSet<>();
+        
+        while(headA != null){
+            set.add(headA);
+            headA = headA.next;
+        }
+        
         while(headB != null) {
-            ListNode temp = headA;
-            while(temp != null) {
-                if(headB == temp)
-                    return headB;
-                temp = temp.next;
-            }
-            
+            if(set.contains(headB))
+                return headB;
             headB = headB.next;
         }
         
