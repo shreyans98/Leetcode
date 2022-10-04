@@ -3,14 +3,17 @@ class Solution {
         
         Arrays.sort(g);
         Arrays.sort(s);
+        int count = 0;
     
 //Assign the cookies to the child with less greed in order to maximise it
-        int i=0;
-        for(int j = 0;j<s.length && i<g.length;j++) {
-            if(g[i] <= s[j])
-                i++;
+        
+        for(int i=g.length-1, j = s.length-1;j>=0 && i>=0;i--){
+            if(s[j]>=g[i]) {
+                count++;
+                j--;
+            }      
         }
-        return i;
+        return count;
         
     }
 }
