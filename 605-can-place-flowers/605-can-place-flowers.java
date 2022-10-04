@@ -4,7 +4,7 @@ class Solution {
         int count =0;
         
         for(int i=0;i<flowerbed.length;i++) {
-            if(flowerbed[i] ==0) {
+            if(flowerbed[i] ==0) { //we will check prev & next position only when we encounter a 0
                 int prev = (i==0 || flowerbed[i-1]==0) ? 0: 1;
                 int next = (i==flowerbed.length-1 || flowerbed[i+1] ==0) ? 0 : 1;
                 
@@ -13,9 +13,12 @@ class Solution {
                     count++;
                 }
             }
+            
+            if(count >=n)
+                return true;
         }
         
-        return count >=n;
+        return false;
         
     }
 }
