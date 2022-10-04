@@ -18,7 +18,7 @@ class Solution {
                 five--;
                 ten++;
             }
-            
+            //for 20$ bill we will check if we have 10$ bill or not, if we do not have it then we have to pay 3 5$
             else {
                 if(ten >0 && five >=1) {
                     ten--;
@@ -27,7 +27,7 @@ class Solution {
                 else
                     five -= 3;
             }
-            
+            //if at any point we have 0 5$ then condition breaks
             if(five<0)
                 return false;
             
