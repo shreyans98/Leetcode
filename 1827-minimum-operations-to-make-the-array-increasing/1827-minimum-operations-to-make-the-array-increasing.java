@@ -4,7 +4,7 @@ class Solution {
         int i=1;
         int temp = 0;
         
-        if(nums.length ==0 || nums.length ==1)
+        if(nums.length <=1)
             return 0;
         
         while(i<nums.length){
