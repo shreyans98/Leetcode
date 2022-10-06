@@ -2,12 +2,11 @@ class Solution {
     public int maxCoins(int[] piles) {
         Arrays.sort(piles);
         
-        int rp = piles.length-1;
-        int mp = rp-1;
-        int lp = 0;
+        int rp = piles.length-1; //right pointer for maximum allocation
+        int mp = rp-1; //middle pointer for second maximum allocation
+        int lp = 0; //left pointer for minimum allocation
         int sum = 0;
-        if(piles.length ==3)
-            return piles[mp];
+       
         
         while(mp>lp) {
             sum += piles[mp];
