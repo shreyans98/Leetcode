@@ -15,7 +15,7 @@ class Solution {
         
         
         
-        while(lp < len) {
+        while(elements>=0) {
             
             while(elements >= 0) {
                 temp = p1 * satisfaction[p];
@@ -28,7 +28,7 @@ class Solution {
             p = len -1;
             ratio = Math.max(ratio, sum);
             sum = 0;
-            lp++;
+            //lp++;
             p1 = len - i;
             elements = p1;
             i++;
