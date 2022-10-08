@@ -5,8 +5,7 @@ class Solution {
         
         int len = satisfaction.length;
         int p1 = len;
-        int lp = 0;
-        int p = len-1;
+        int p = len-1; //variable to access each character
         int temp = 0;
         int sum = 0;
         int elements = len-1;
@@ -28,7 +27,6 @@ class Solution {
             p = len -1;
             ratio = Math.max(ratio, sum);
             sum = 0;
-            //lp++;
             p1 = len - i;
             elements = p1;
             i++;
