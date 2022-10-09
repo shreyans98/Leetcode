@@ -1,27 +1,28 @@
 class Solution {
     public int findMin(int[] nums) {
         
-        int first = 0;
-        int last = nums.length-1;
-        int temp = 0;
-        int mid = 0;
-        if(nums[last]> nums[0] || nums.length ==1)
-            return nums[0];
+        int res = nums[0];
+        int left = 0;
+        int right = nums.length-1;
         
-        while(first<=last) {
-            mid = first + (last-first)/2;
+        while(left<=right) {
+            //if array is already sorted, then minimum of the condition
+            if(nums[left]<nums[right]){
+                res = Math.min(nums[left], res);
+                break;
+            }
             
-            if(nums[mid] > nums[mid+1])
-                return nums[mid+1];
+            int mid = left + (right-left)/2;
             
-            if(nums[mid] < nums[mid-1])
-                return nums[mid];
+            res = Math.min(res, nums[mid]);
             
-            if(nums[mid] > nums[0])
-                first = mid+1;
+            if(nums[mid]>=nums[left])
+                left = mid+1;
             else
-                last = mid-1;
+                right = mid-1;
         }
-        return 1;
+        
+        return res;
+        
     }
 }
