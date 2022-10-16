@@ -14,7 +14,18 @@ class Solution {
     }
     
     public void recurse(List<List<Integer>> res, List<Integer> sub, int k, int n, int start) {
+        
+        //Optimization condition(if the size of sub array list increases then we will not proceed further)
+        if(sub.size() > k)
+            return;
+        
+        //as we are subtracting from n, so it cannot be negative 
+        if(n<0)
+            return;
+        
+        
         //Only when k numbers are used and n is 0 then add it to list
+        
         if(n==0 && k==sub.size()) { 
             res.add(new ArrayList<>(sub));
             return;
@@ -22,12 +33,14 @@ class Solution {
         
             //start will change with every recursion call since we have to use a number atmost once
             for(int i=start;i<=9;i++){
+                
                 sub.add(i);
                 recurse(res, sub,k,n-i,i+1);
                 
                 //not pick then remove it to proceed with  this set of recursion
                 sub.remove(sub.size() - 1);
             }
+        
 
     }
 }
