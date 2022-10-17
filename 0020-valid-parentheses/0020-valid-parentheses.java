@@ -9,29 +9,59 @@ class Solution {
         for(int i=0;i<s.length();i++) {
             char ch = s.charAt(i);
             
-            if(ch == '(' || ch == '{' || ch == '[')
-                st.push(ch);
-            
-            else if(ch == ')'){
-                if(st.isEmpty())
+            switch(ch) {
+                case '(':
+                case '[':
+                case '{':
+                    st.push(ch);
+                    break;
+                
+                case ')':
+                     if(st.isEmpty())
                     return false;
                 if(st.pop() !='(')
-                    return false;      
-            }
-            
-            else if(ch == ']'){
-                if(st.isEmpty())
+                    return false;   
+                    break;
+                    
+                     case ']':
+                     if(st.isEmpty())
                     return false;
                 if(st.pop() !='[')
-                    return false;      
-            }
-            
-            else if(ch == '}'){
-                if(st.isEmpty())
+                    return false;   
+                    break;
+                    
+                     case '}':
+                     if(st.isEmpty())
                     return false;
                 if(st.pop() !='{')
-                    return false;      
+                    return false;   
+                    break;
+                    
             }
+            
+//             if(ch == '(' || ch == '{' || ch == '[')
+//                 st.push(ch);
+            
+//             else if(ch == ')'){
+//                 if(st.isEmpty())
+//                     return false;
+//                 if(st.pop() !='(')
+//                     return false;      
+//             }
+            
+//             else if(ch == ']'){
+//                 if(st.isEmpty())
+//                     return false;
+//                 if(st.pop() !='[')
+//                     return false;      
+//             }
+            
+//             else if(ch == '}'){
+//                 if(st.isEmpty())
+//                     return false;
+//                 if(st.pop() !='{')
+//                     return false;      
+//             }
             
             
            
