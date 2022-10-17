@@ -1,34 +1,29 @@
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         
-        int res[] = new int[nums1.length];
-        for(int m=0;m<res.length;m++)
-            res[m] = -1;
+/*
+Idea behind the approach is:
+If we have a decresing array then we can keep on storing them in the stack till the time next greater number is not encountered.
+When we encounter the next greater element then we will pop elements from stack till the number popped is smaller then that number and hence this greater number becomes the next greater element for all the numbers popped of.
+
+
+
+
+*/
         
-        for(int i=0;i<nums1.length;i++) {
-            int temp = nums1[i];
-            
-            int j= 0;
-            while(nums2[j] != nums1[i])
-                j++;
-            
-            if(j>nums2.length-2)
-                res[i] = -1;
-            else {
-                for(int k=j+1;k<nums2.length;k++) {
-                    if(nums2[j] < nums2[k]){
-                        res[i] = nums2[k];
-                        break;
-                    }
-                        
-                    
-                }
-            }
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Stack<Integer> st = new Stack<Integer>();
+        
+        for(int num: nums2){
+            while(!st.isEmpty() && st.peek() < num)
+                map.put(st.pop(), num);
+            st.push(num);
         }
+            
+            for(int i=0;i<nums1.length;i++)
+                nums1[i] = map.getOrDefault(nums1[i], -1);
+            
         
-        return res;
-        
-        
-        
+        return nums1;
     }
 }
