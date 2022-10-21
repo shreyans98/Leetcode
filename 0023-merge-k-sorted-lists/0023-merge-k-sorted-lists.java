@@ -11,28 +11,29 @@
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         
-        List<Integer> l = new ArrayList<Integer>();
-        
+/*
+Intuition behind the approach is to initialise a min heap and then add every element of the list to the min heap.
+Since it is a min heap, therefore root will be the smallest element and we can extract it and add to the new list.
+
+
+*/
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        //ading everything to the new priority queue
         for(ListNode ln : lists) {
-            while (ln != null) {
-                l.add(ln.val);
+            while(ln != null) {
+                pq.add(ln.val);
                 ln = ln.next;
             }
         }
-        
-        Collections.sort(l);
-        
+        //list to store the sorted list
         ListNode head = new ListNode(0);
         ListNode h = head;
         
-        for(int i : l) {
-            ListNode t = new ListNode(i);
-            
+        while(!pq.isEmpty()) {
+            ListNode t = new ListNode(pq.poll());
             h.next = t;
             h = h.next;
         }
-        
-        h.next = null;
         
         return head.next;
         
