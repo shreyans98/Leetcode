@@ -30,32 +30,86 @@ class Solution {
         
         
         
-        List<Integer> post = new ArrayList<Integer>();
+//         List<Integer> post = new ArrayList<Integer>();
         
-        Stack<TreeNode> st1 = new Stack<TreeNode>();
-        Stack<TreeNode> st2 = new Stack<TreeNode>();
+//         Stack<TreeNode> st1 = new Stack<TreeNode>();
+//         Stack<TreeNode> st2 = new Stack<TreeNode>();
+        
+//         if(root == null)
+//             return post;
+        
+//         st1.push(root);
+        
+//         while(!st1.isEmpty()) {
+//             root = st1.pop();
+//             st2.push(root);
+            
+//             if(root.left != null)
+//                 st1.push(root.left);
+            
+//             if(root.right != null)
+//                 st1.push(root.right);
+                
+            
+//         }
+        
+//         while(!st2.isEmpty())
+//             post.add(st2.pop().val);
+        
+//         return post;
+        
+        
+        
+        /*
+        //using 1 stack
+        
+        =====================================================================================
+        
+        */  
+        
+        
+        List<Integer> res = new ArrayList<>();
+        Stack<TreeNode> st = new Stack<TreeNode>();
         
         if(root == null)
-            return post;
+            return res;
         
-        st1.push(root);
+        TreeNode curr = root;
+    
         
-        while(!st1.isEmpty()) {
-            root = st1.pop();
-            st2.push(root);
+        while(curr != null || !st.isEmpty()) {
             
-            if(root.left != null)
-                st1.push(root.left);
+            if(curr != null) {
+                st.push(curr);
+                curr = curr.left;
+            }
             
-            if(root.right != null)
-                st1.push(root.right);
-                
+            else {
+                TreeNode temp = st.peek().right;
+                if(temp == null) {
+                    temp = st.peek();
+                    st.pop();
+                    res.add(temp.val);
+                    
+                    while(!st.isEmpty() && temp == st.peek().right) {
+                        temp = st.peek();
+                        st.pop();
+                        res.add(temp.val);
+                    }
+                    
+                }
+                else
+                    curr = temp;
+            }
             
         }
         
-        while(!st2.isEmpty())
-            post.add(st2.pop().val);
+        return res;
         
-        return post;
+        
+        
+        
+        
+        
     }
 }
