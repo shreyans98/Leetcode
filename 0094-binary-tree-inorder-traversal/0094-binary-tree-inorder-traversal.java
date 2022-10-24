@@ -16,6 +16,43 @@
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         
+        List<Integer> inorder = new ArrayList<>();
+        
+        TreeNode curr = root;
+        
+        while(curr != null) {
+            if(curr.left == null) {//parent node is accessed
+                inorder.add(curr.val);
+                curr=curr.right;
+            }
+            
+            else {
+                TreeNode prev = curr.left;
+                
+                while(prev.right != null && prev.right != curr) {//travel upto the right most element
+                    prev = prev.right;
+                }
+                
+                if(prev.right == null) {//connecing the thread (right most element of left sub tree with current element)
+                    prev.right = curr;
+                    curr = curr.left;
+                }
+                
+                else {
+                    prev.right = null;//disconnect the above thread
+                    inorder.add(curr.val);//inorder will take the value as it will be the root node now
+                    curr = curr.right;
+                }
+            }
+        }
+        return inorder;
+        
+        
+        
+        
+        
+        
+        
 //         List<Integer> in = new ArrayList<Integer>();
         
 //         if(root ==null)
@@ -36,25 +73,25 @@ class Solution {
           */
         
         
-        List<Integer> in = new ArrayList<>();
+//         List<Integer> in = new ArrayList<>();
         
-        Stack<TreeNode> st = new Stack<TreeNode>();
+//         Stack<TreeNode> st = new Stack<TreeNode>();
         
-        TreeNode curr = root;
+//         TreeNode curr = root;
         
-        while(curr != null || !st.isEmpty()) {
+//         while(curr != null || !st.isEmpty()) {
             
-            while(curr != null) {
-                st.push(curr);
-                curr = curr.left;
-            }
+//             while(curr != null) {
+//                 st.push(curr);
+//                 curr = curr.left;
+//             }
             
-            curr = st.pop();
-            in.add(curr.val);
-            curr = curr.right;
-        }
+//             curr = st.pop();
+//             in.add(curr.val);
+//             curr = curr.right;
+//         }
         
-        return in;
+//         return in;
         
         
     }
