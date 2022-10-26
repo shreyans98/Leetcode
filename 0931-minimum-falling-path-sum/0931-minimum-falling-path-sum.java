@@ -6,40 +6,36 @@ class Solution {
         
         int dp[][] = new int[row][col];
         
-        for(int arr[] : dp)
-            Arrays.fill(arr, -1);
         
         int maxi = Integer.MAX_VALUE;
         
-        for(int i=0;i<col;i++) {
-            maxi = Math.min(maxi, solve(row-1, i, matrix, dp));
-            
+        for(int j=0;j<col;j++)
+            dp[0][j] = matrix[0][j];
+        
+        for(int i=1;i<row;i++) {
+            for(int j=0;j<col;j++) {
+                
+                int up = matrix[i][j] + dp[i-1][j];
+                int leftDia = matrix[i][j];
+                int rightDia = matrix[i][j];
+                
+                if(j>0)
+                    leftDia += dp[i-1][j-1];
+                else
+                    leftDia += (int) Math.pow(10, 9);
+                
+                if(j<col-1)
+                    rightDia += dp[i-1][j+1];
+                else
+                    rightDia += (int) Math.pow(10, 9);
+                
+                dp[i][j] = Math.min(up, Math.min(leftDia, rightDia));
+            }
         }
+        int result = Integer.MAX_VALUE;
+        for(int i=0;i<col;i++)
+            result = Math.min(result, dp[row-1][i]);
         
-        return maxi;
-        
-    }
-    
-    public int solve(int row, int col, int matrix[][], int dp[][]) {
-        
-        if(col < 0 || col >= matrix[0].length)
-            return (int) Math.pow(10, 9);
-        
-        if(row ==0)
-            return matrix[row][col];
-        
-        if(dp[row][col] != -1)
-            return dp[row][col];
-        
-        else {
-            int up = matrix[row][col] + solve(row-1, col, matrix, dp);
-            int rgDia = matrix[row][col] + solve(row-1, col+1, matrix, dp);
-            int lefDia = matrix[row][col] + solve(row-1, col-1, matrix, dp);
-            
-            
-            return dp[row][col] = Math.min(up, Math.min(lefDia, rgDia));
-        }
-        
-        
+        return result;
     }
 }
