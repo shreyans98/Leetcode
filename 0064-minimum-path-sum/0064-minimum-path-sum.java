@@ -6,29 +6,36 @@ class Solution {
         
         int dp[][] = new int[row][col];
         
-        for(int x[]: dp)
-            Arrays.fill(x, -1);
         
-        return solve(row-1, col-1, grid, dp);
+        for(int i=0;i<row;i++) {
+            for(int j=0;j<col;j++) {
+                
+                if(i==0 && j==0) {
+                    dp[i][j] = grid[i][j];
+                    continue;
+                }
+                
+                else {
+                    int up = grid[i][j];
+                    int left = grid[i][j];
+                    
+                    if(i>0)
+                        up += dp[i-1][j];
+                    else
+                        up += (int) Math.pow(10, 9);
+                    
+                    if(j>0)
+                        left += dp[i][j-1];
+                    else
+                        left += (int) Math.pow(10, 9);
+                    
+                    dp[i][j] = Math.min(up, left);
+                        
+                }
+            }
+        }
         
-    }
-    
-    public int solve(int row, int col, int grid[][], int dp[][]) {
-        
-        if(row ==0 && col ==0)
-            return grid[row][col];
-        
-        if(row<0 || col < 0)
-            return (int)Math.pow(10,9);
-        
-        if(dp[row][col] != -1)
-            return dp[row][col];
-        
-        int up = solve(row-1, col, grid, dp) + grid[row][col];
-        
-        int left = solve(row, col-1, grid, dp) + grid[row][col];
-        
-        return dp[row][col] =  Math.min(up, left);
+        return dp[row-1][col-1];
         
     }
 }
