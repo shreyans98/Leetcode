@@ -1,20 +1,27 @@
 class Solution {
     public boolean canPartition(int[] nums) {
-        int totSum=0;
-    int n = nums.length;
-    for(int i=0; i<n;i++){
-        totSum+= nums[i];
-    }
-    
-    if (totSum%2==1) return false;
-    
-    else{
-        int k = totSum/2;
-        int dp[][]=new int[n][k+1];
-        for(int row[]: dp)
-        Arrays.fill(row,-1);
-        return solve(n-1,nums,k,dp);
-    } 
+       
+        int sum = 0;
+        
+        for(int arr=0;arr<nums.length;arr++)
+            sum += nums[arr];
+        
+        if(sum % 2 ==1)
+            return false;
+        
+        else {
+            
+             int len = nums.length;
+             int k = sum/2;
+             int dp[][] = new int[len][k+1];
+        
+             for(int arr[]: dp)
+            
+                 Arrays.fill(arr, -1);
+        
+             return solve(len-1, nums, k, dp);
+            
+        }
         
        
     }
