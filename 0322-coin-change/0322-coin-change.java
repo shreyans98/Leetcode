@@ -1,47 +1,40 @@
 class Solution {
     public int coinChange(int[] coins, int amount) {
+        int len = coins.length;
         
-        int dp[][] = new int[coins.length][amount+1];
-        
-        for(int ar[] : dp)
-            Arrays.fill(ar, -1);
-        
-        int solution = solve(coins.length-1, amount, coins, dp);
-
+        int dp[][] = new int[len][amount+1];
         
         
-        return solution == (int) Math.pow(10, 9) ? -1 : solution;
+        for(int i=0;i<len;i++)
+            dp[i][0] = 0;
         
-    }
-    
-    
-    public int solve(int index, int amount, int coins[], int dp[][]) {
         
-        if(index ==0) {
-            if(amount % coins[index] ==0)
-                return amount/coins[index];
+        
+        for(int j=0;j<= amount;j++) {
+            
+            if(j % coins[0] ==0)
+                dp[0][j] = j/coins[0];
             else
-                return (int) Math.pow(10, 9);
+                dp[0][j] = (int) Math.pow(10, 9);
         }
         
-        if(amount ==0)
-            return 0;
         
-        if(dp[index][amount] != -1)
-            return dp[index][amount];
+        for(int i=1;i<len;i++) {
+            for(int target = 0;target<=amount;target++) {
+                
+                int notTake = 0 + dp[i-1][target];
+                int take = (int) Math.pow(10, 9);
+                
+                if(target>=coins[i])
+                    take = 1 + dp[i][target-coins[i]];
+                
+                dp[i][target] = Math.min(take, notTake);
+            }
+        }
         
-        
-        
-        
-        
-        int notTake = 0 + solve(index-1, amount, coins, dp);
-        
-        int take = (int) Math.pow(10, 9);
-        if(amount >= coins[index])
-            take = solve(index, amount-coins[index], coins, dp) + 1;
-        
-        return dp[index][amount] = Math.min(take, notTake);
-        
-        
+        return dp[len-1][amount] == (int) (Math.pow(10, 9)) ? -1 : dp[len-1][amount];
     }
+    
+    
+
 }
