@@ -3,6 +3,35 @@ class Solution {
         int len1 = text1.length();
         int len2 = text2.length();
         
+        int prev[] = new int[len2+1];
+        int curr[] = new int[len2+1];
+        
+        
+        
+        
+        for(int i=1;i<=len1;i++){
+            for(int j=1;j<=len2;j++){
+                
+                char c1 = text1.charAt(i-1);
+                char c2 = text2.charAt(j-1);
+                
+                if(c1 == c2)
+                    curr[j] = 1 + prev[j-1];
+                else
+                    curr[j] = 0 + Math.max(curr[j-1], prev[j]);
+            }
+            prev=(int[])(curr.clone());
+        }
+        
+        return prev[len2];
+        
+    }
+    
+    
+     public int longestCommonSubsequenceT(String text1, String text2) {
+        int len1 = text1.length();
+        int len2 = text2.length();
+        
         int dp[][] = new int[len1+1][len2+1];
         
         for(int i=0;i<len1;i++)
@@ -28,6 +57,8 @@ class Solution {
         
     }
     
+    
+    //not used
     public int solve(String s1, String s2, int ind1, int ind2, int dp[][]) {
         
         //base case
