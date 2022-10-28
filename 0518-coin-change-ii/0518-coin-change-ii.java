@@ -3,33 +3,44 @@ class Solution {
         
         int len = coins.length;
         
-        int dp[][] = new int[len][amount+1];
+      //  int dp[][] = new int[len][amount+1];
         
-        for(int i=0;i<len;i++)
-            dp[i][0] = 0;
+        int prev[] = new int[amount+1];
+        
+        
+        // for(int i=0;i<len;i++)
+        //     dp[i][0] = 0;
+        
+        prev[0] = 0;
         
         for(int j=0;j<=amount;j++) {
             if(j%coins[0]==0)
-                dp[0][j] = 1;
+                prev[j] = 1; //dp[0][j] = 1;
             else
-                dp[0][j] = 0;
+                prev[j] = 0; //dp[0][j] = 0;
         }
         
         
         for(int index=1;index<len;index++) {
+            int curr[] = new int[amount+1];
+            
             for(int target=0;target<=amount;target++){
-                int notTake = dp[index-1][target];
+                
+                int notTake = prev[target]; //dp[index-1][target];
                 int take = 0;
                 
                 if(target>=coins[index])
-                    take = dp[index][target-coins[index]];
+                    take = curr[target-coins[index]]; //dp[index][target-coins[index]];
                 
-                dp[index][target] = take + notTake;
+                curr[target] = take + notTake;
+              //  dp[index][target] = take + notTake;
                 
             }
+            
+            prev = curr;
         }
         
-        return dp[len-1][amount];
+        return prev[amount]; //dp[len-1][amount];
         
     }
     
