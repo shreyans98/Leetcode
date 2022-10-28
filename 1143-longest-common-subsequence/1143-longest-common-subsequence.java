@@ -5,12 +5,26 @@ class Solution {
         
         int dp[][] = new int[len1+1][len2+1];
         
+        for(int i=0;i<len1;i++)
+            dp[i][0] = 0;
         
+        for(int j=0;j<len2;j++)
+            dp[0][j] = 0;
         
-        for(int ar[] : dp)
-            Arrays.fill(ar, -1);
+        for(int i=1;i<=len1;i++){
+            for(int j=1;j<=len2;j++){
+                
+                char c1 = text1.charAt(i-1);
+                char c2 = text2.charAt(j-1);
+                
+                if(c1 == c2)
+                    dp[i][j] = 1 + dp[i-1][j-1];
+                else
+                    dp[i][j] = 0 + Math.max(dp[i][j-1], dp[i-1][j]);
+            }
+        }
         
-        return solve(text1, text2, len1, len2, dp);
+        return dp[len1][len2];
         
     }
     
