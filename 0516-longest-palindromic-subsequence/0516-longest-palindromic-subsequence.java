@@ -6,13 +6,15 @@ class Solution {
         
         int len = s.length();
         
-        int dp[][] = new int[len+1][len+1];
+      //  int dp[][] = new int[len+1][len+1];
+        int prev[] = new int[len+1];
+        int curr[] = new int[len+1];
         
-        for(int i=0;i<=len;i++)
-            dp[i][0] = 0;
+//         for(int i=0;i<=len;i++)
+//             dp[i][0] = 0;
         
-        for(int j=0;j<=len;j++)
-            dp[0][j] = 0;
+//         for(int j=0;j<=len;j++)
+//             dp[0][j] = 0;
         
         
         for(int i=1;i<=len;i++) {
@@ -22,13 +24,17 @@ class Solution {
                 char c2 = rev.charAt(j-1);
                 
                 if(c1 == c2)
-                    dp[i][j] = 1 + dp[i-1][j-1];
+                    curr[j] = 1 + prev[j-1];
+                  //  dp[i][j] = 1 + dp[i-1][j-1];
                 
                 else
-                    dp[i][j] = 0 + Math.max(dp[i-1][j], dp[i][j-1]);
+                    curr[j] = 0 + Math.max(prev[j], curr[j-1]);
+                   // dp[i][j] = 0 + Math.max(dp[i-1][j], dp[i][j-1]);
             }
+            prev = (int[])(curr.clone());
         }
         
-        return dp[len][len];
+        //return dp[len][len];
+        return prev[len];
     }
 }
