@@ -4,25 +4,32 @@ class Solution {
         int len = prices.length;
         //int buy = 0;
         
-        int dp[][] = new int[len+1][2];
-        dp[len][0] = dp[len][1] = 0;
+        //int dp[][] = new int[len+1][2];
+        int ahead[] = new int[2];
+        ahead[0] = ahead[1] = 0;
+        
+        int curr[] = new int[2];
+       // dp[len][0] = dp[len][1] = 0;
         
         for(int ind=len-1;ind>=0;ind--) {
             for(int buy = 0;buy<=1;buy++ ) {
                 int profit = 0;
                 
                 if(buy == 0)  
-                    profit = Math.max(-prices[ind] + dp[ind+1][1],  0 + dp[ind+1][0]);
+                    profit = Math.max(-prices[ind] + ahead[1], 0 + ahead[0] );
+                   // profit = Math.max(-prices[ind] + dp[ind+1][1],  0 + dp[ind+1][0]);
                 
                 if(buy == 1)
-                    profit = Math.max( prices[ind] + dp[ind+1][0], 0 + dp[ind+1][1]);  
+                    profit = Math.max(prices[ind]+ahead[0], 0+ahead[1]);
+                   // profit = Math.max( prices[ind] + dp[ind+1][0], 0 + dp[ind+1][1]);  
               
-                dp[ind][buy] = profit;
+                curr[buy] = profit;
 
             }
+            ahead = curr.clone();
         }
         
-        return dp[0][0];
+        return ahead[0];
         
         
 //         for(int ar[] : dp)
