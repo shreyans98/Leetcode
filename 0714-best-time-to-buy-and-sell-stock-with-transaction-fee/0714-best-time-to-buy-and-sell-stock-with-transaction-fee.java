@@ -4,10 +4,24 @@ class Solution {
         int len = prices.length;
         int dp[][] = new int[len+1][2];
         
-        for(int ar[] : dp)
-            Arrays.fill(ar, -1);
+        for(int ind=len-1;ind>=0;ind--){
+            for(int buy=0;buy<=1;buy++) {
+                
+                if(buy ==0)
+                    dp[ind][buy] = Math.max(0 + dp[ind+1][0], -prices[ind]+dp[ind+1][1]);
+                
+                if(buy ==1)
+                    dp[ind][buy] = Math.max(0 + dp[ind+1][1], prices[ind]-fee+dp[ind+1][0]);
+                
+            }
+        }
         
-        return solve(0, len, fee, 0, prices, dp);
+        return dp[0][0];
+        
+//         for(int ar[] : dp)
+//             Arrays.fill(ar, -1);
+        
+//         return solve(0, len, fee, 0, prices, dp);
         
     }
     
