@@ -1,5 +1,35 @@
 class Solution {
-    public int numDistinct(String s, String t) {
+    public int numDistinct(String s1, String s2) {
+        
+        int n = s1.length();
+        int m = s2.length();
+        
+        
+         int[] prev=new int[m+1];
+    prev[0]=1;
+    
+        for(int i=1;i<n+1;i++){
+            for(int j=m;j>=1;j--){ // Reverse direction
+
+                if(s1.charAt(i-1)==s2.charAt(j-1))
+                    prev[j] = (prev[j-1] + prev[j]);
+                else
+                    prev[j] = prev[j]; //can omit this statemwnt
+            }
+        }
+
+        return prev[m];
+        
+        
+        
+//         for(int ar[] : dp)
+//             Arrays.fill(ar, -1);
+        
+//         return solve(len1-1, len2-1, s, t, dp);
+        
+    }
+    
+     public int numDistincts(String s, String t) {
         
         int len1 = s.length();
         int len2 = t.length();
