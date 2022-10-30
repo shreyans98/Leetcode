@@ -2,6 +2,42 @@ class Solution {
     public int maxProfit(int[] prices) {
         int len = prices.length;
         
+        int front1[] = new int[2];
+        int front2[] = new int[2];
+        int curr[] = new int[2];
+        
+        
+        
+        
+        
+        for(int ind = len-1;ind>=0;ind--) {
+            for(int buy = 0;buy<=1;buy++){
+                
+                if(buy ==0)
+                    curr[buy] = Math.max(0 + front1[0], -prices[ind]+front1[1]);
+                
+                if(buy == 1)
+                    curr[buy] = Math.max(0 + front1[1], prices[ind]+front2[0]);
+            }
+            front2 = (int[])(front1.clone());
+            front1 = (int [])(curr.clone());
+        }
+        
+        return curr[0];
+        
+        
+        
+//         for(int ar[]: dp)
+//             Arrays.fill(ar, -1);
+        
+//         return solve(0, len, 0, prices, dp);
+    }
+    
+    
+    /*
+    Tabulization approach
+      int len = prices.length;
+        
         int dp[][] = new int[len+2][2];
         
         
@@ -17,14 +53,8 @@ class Solution {
         }
         
         return dp[0][0];
-        
-        
-        
-//         for(int ar[]: dp)
-//             Arrays.fill(ar, -1);
-        
-//         return solve(0, len, 0, prices, dp);
-    }
+    
+    */
     
     
     public int solve(int ind, int len, int buy, int prices[], int dp[][]) {
