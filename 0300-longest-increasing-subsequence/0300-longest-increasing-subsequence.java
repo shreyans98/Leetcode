@@ -2,7 +2,8 @@ class Solution {
     public int lengthOfLIS(int[] nums) {
         
         int len = nums.length;
-        int dp[] = new int[len+1];
+        int dp[] = new int[len];
+        int hash[] = new int[len];
         int maxi = 1;
         
         Arrays.fill(dp, 1);
