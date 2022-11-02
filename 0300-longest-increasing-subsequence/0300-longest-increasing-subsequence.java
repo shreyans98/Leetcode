@@ -2,23 +2,26 @@ class Solution {
     public int lengthOfLIS(int[] nums) {
         
         int len = nums.length;
-        int next[] = new int[len+1];
-        int curr[] = new int[len+1];
+        int dp[] = new int[len+1];
+        int maxi = 1;
         
-        for(int ind=len-1;ind>=0;ind--) {
-            for(int prev_ind = ind-1;prev_ind>=-1;prev_ind--){
+        Arrays.fill(dp, 1);
+        
+        for(int ind=0;ind<len;ind++) {
+            for(int prev_ind=0; prev_ind<ind;prev_ind++) {
                 
-                int notTake = 0 + next[prev_ind+1];
-                int take = 0;
-                if(prev_ind == -1 || nums[ind]>nums[prev_ind])
-                    take = 1 + next[ind+1];
-                
-                curr[prev_ind+1] = Math.max(take, notTake);
+                if(nums[prev_ind]<nums[ind])
+                    dp[ind] = Math.max(1 + dp[prev_ind], dp[ind]);
             }
-            next = curr;
+            
+            maxi = Math.max(maxi, dp[ind]);
         }
         
-        return next[-1+1];
+        return maxi;
+        
+        
+        
+       
         
 //         for(int ar[] : dp)
 //             Arrays.fill(ar, -1);
@@ -66,6 +69,27 @@ class Solution {
         }
         
         return dp[0][-1+1];
+        
+        
+        Memory optimization
+         int len = nums.length;
+        int next[] = new int[len+1];
+        int curr[] = new int[len+1];
+        
+        for(int ind=len-1;ind>=0;ind--) {
+            for(int prev_ind = ind-1;prev_ind>=-1;prev_ind--){
+                
+                int notTake = 0 + next[prev_ind+1];
+                int take = 0;
+                if(prev_ind == -1 || nums[ind]>nums[prev_ind])
+                    take = 1 + next[ind+1];
+                
+                curr[prev_ind+1] = Math.max(take, notTake);
+            }
+            next = curr;
+        }
+        
+        return next[-1+1];
     
     
     
