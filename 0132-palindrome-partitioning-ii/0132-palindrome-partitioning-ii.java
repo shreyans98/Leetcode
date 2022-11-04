@@ -2,10 +2,26 @@ class Solution {
     public int minCut(String s) {
         int len = s.length();
         
-        int dp[] = new int[len];
-        Arrays.fill(dp, -1);
+        int dp[] = new int[len+1];
         
-        return solve(s, 0, len, dp);
+        for(int i=len-1;i>=0;i--) {
+            int minCost = Integer.MAX_VALUE;
+            
+            for(int j=i;j<len;j++) {
+                if(isPalindrome(s, i, j)){
+                    int cost = 1 + dp[j+1];
+                    minCost = Math.min(minCost, cost);
+                }
+            }
+            dp[i] = minCost;
+        }
+        
+        return dp[0]-1;
+        
+        
+       // Arrays.fill(dp, -1);
+        
+       // return solve(s, 0, len, dp);
     }
     
     public int solve(String s, int i, int len, int dp[]) {
