@@ -32,63 +32,40 @@ class GFG {
 // } Driver Code Ends
 
 
-
-class Pair {
-    int first;
-    int second;
-    
-    Pair(int _first, int _second) {
-        this.first = _first;
-        this.second = _second;
-    }
-}
-
-
 class Solution {
     // Function to detect cycle in an undirected graph.
     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
         // Code here
         
-        boolean vis[] = new boolean[V];
-        Arrays.fill(vis, false);
-        
-        int parent[] = new int[V];
-        Arrays.fill(parent, -1);
+        int vis[] = new int[V];
         
         for(int i=0;i<V;i++) {
-            if(vis[i] == false)
-               if(checkCycle(i, V, adj, vis))
-                  return true;
-        }
-        return false;
-        
-    }
-    
-    public boolean checkCycle(int src, int V, ArrayList<ArrayList<Integer>> adj, boolean vis[]) {
-        
-        Queue<Pair> q = new LinkedList<>(); //BFS
-        vis[src] = true;
-        
-        q.add(new Pair(src, -1));
-        
-        while(!q.isEmpty()) {
-            int node = q.peek().first;
-            int par = q.peek().second;
-            
-            q.remove();
-            
-            //go to all adjacent nodes
-            
-            for(Integer it : adj.get(node)) {
-                if(vis[it] == false) {
-                    q.add(new Pair(it, node));
-                    vis[it] = true;
+            if(vis[i] ==0) {
+                if(dfs(i, -1, V, adj, vis) == true){
+                    return true;
                 }
-                
-                else if(par != it)
-                return true;
             }
         }
+        return false;
+    }
+    
+    public boolean dfs(int node, int parent, int V, ArrayList<ArrayList<Integer>> adj, int vis[]) {
+        
+        vis[node] = 1;
+        
+        for(int adjNode : adj.get(node)) {
+            if(vis[adjNode] == 0) {
+                if(dfs(adjNode, node, V, adj, vis)) {
+                    return true;
+                }
+            }
+                
+                else if(adjNode != parent) {
+                    return true;
+                }
+            
+        }
+        
         return false;
         
     }
