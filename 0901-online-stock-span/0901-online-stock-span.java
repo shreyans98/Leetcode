@@ -1,28 +1,22 @@
 class StockSpanner {
-    
-    Stack<Pair<Integer, Integer>> st;
+    Deque<Integer[]> deque;
 
     public StockSpanner() {
-        
-        st = new Stack<>();
-        
+        deque = new ArrayDeque<Integer[]>();
     }
     
     public int next(int price) {
+        int days = 1;
         
-        int val = 1;
+        while (!deque.isEmpty() && deque.peekLast()[0] <= price) {
+            days += deque.removeLast()[1];
+        }
         
-        while(!st.isEmpty() && st.peek().getKey() <= price)
-            val += st.pop().getValue();
+        deque.addLast(new Integer[] {price, days});
         
-        Pair<Integer, Integer> p = new Pair<>(price, val);
-        st.push(p);
-        
-        return p.getValue();
-        
+        return days;
     }
 }
-
 /**
  * Your StockSpanner object will be instantiated and called as such:
  * StockSpanner obj = new StockSpanner();
