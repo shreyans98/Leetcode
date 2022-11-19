@@ -3,7 +3,7 @@ class MedianFinder {
     2 priority queue to divide the array into 2 parts.
     The small priority queue is sorted in descending order and the large one in ascending order.
     
-    Small priority queue will have always k elements and will be equal or less in size then the large priority     queue. Both can have the same element or the small queue will have one extra element.
+    Small priority queue will have always k/k+1 elements and will be equal or mpre in size then the large priority     queue. Both can have the same element or the small queue will have one extra element.
     
     When both have the same element, then we will enter the num in the large heap and pop the max element from     it and then push that element to the small heap.
     
