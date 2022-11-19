@@ -13,18 +13,29 @@ class Solution {
         for(int key : map.keySet()) 
             heap.add(key); 
         
-        //list to store the numbers
-        List<Integer> ans = new ArrayList<>();
-        for(int i = 0; i < k; i++)
-            ans.add(heap.poll());
+//         //list to store the numbers
+//         List<Integer> ans = new ArrayList<>();
+//         for(int i = 0; i < k; i++)
+//             ans.add(heap.poll());
         
         
-        //convert arraylist to array
-        int[] arr = new int[ans.size()];
-        int i = 0;
-        for (Integer e : ans)
-            arr[i++] = e;
+//         //convert arraylist to array
+//         int[] arr = new int[ans.size()];
+//         int i = 0;
+//         for (Integer e : ans)
+//             arr[i++] = e;
+//         return arr;
+        
+        ///
+        
+        int arr[] = new int[k];
+        
+        for(int i=0;i<k;i++) {
+            arr[i] = heap.poll();
+        }
+        
         return arr;
+        
         
     }
 }
