@@ -13,6 +13,18 @@
  *     }
  * }
  */
+
+/*
+Here, we leverage the fact that Inorder Traversal of a BST gives a sorted list of elements.
+If there are exactly 2 swapped nodes, we can check the mistake in the inorder traversal.
+For eg.,
+root = [6,2,5,null,null,null,3]
+Inorder traversal: [2,6,5,3] (Not sorted).
+
+First incorrect node/element is 6 because 6 > 5 (first == null && prev > curr) => prev is the first node.
+Second incorrect node/element is 3, because 5 > 3 (first != null && prev > curr), curr is the second node.
+To cover the edge-case of 2 consecutive elements to be swapped, we always assign second = curr.
+*/
 class Solution {
     TreeNode prev = null, first = null, second = null;
     public void recoverTree(TreeNode root) {
